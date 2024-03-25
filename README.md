@@ -108,3 +108,53 @@
 
         - append one slice to another slice
             - ```slice3 = append(slice1, slice2...)```
+
+- ***Go Loops***
+
+    1. ```for``` loops 
+
+        ```go
+        for statement1; statement2; statement3 {
+            // code to be executed for each iteration
+        }
+        ```
+
+        example:
+
+        ```go
+        for i:=0; i < 5; i++ {
+            fmt.Println(i)
+        }
+        ```
+
+    2. ```range``` keyword
+
+        ```go
+        for index, value := array|slice|map {
+            // code to be executed for each iteration
+        }
+        ```
+
+        example:
+
+        This example uses ```range``` to iterate over an array and print both the indexes and the values at each (idx stores the index, val stores the value):
+        ```go
+        fruits := [3]string{"apple", "orange", "banana"}
+        for idx, val := range fruits {
+            fmt.Printf("%v\t%v\n", idx, val)
+        }
+        ```
+
+        Here, we want to omit the indexes (idx stores the index, val stores the value):
+        ```go
+        fruits := [3]string{"apple", "orange", "banana"}
+        for _, val := range fruits {
+            fmt.Printf("%v\n", val)
+        }
+        ```
+
+- ***Go functions***
+
+
+
+    

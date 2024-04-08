@@ -155,6 +155,37 @@
 
 - ***Go functions***
 
+    GO functions can also take fuctions as parameters and cna also return multiple values
 
+    ```go
+    func functionsName(paramters ,parameters) (returnType){
+        //code
+    }
+    ```
 
-    
+    example:
+
+    ```go
+    func circleArea(r float64) (float64){
+        return math.Pi * r * r
+    }
+    ```
+
+    ```go
+    func cycleName(n []string, f func(string)) {
+        for _, v := range n {
+            f(v)
+        }
+    }
+    ```
+
+- ***Go Maps***
+
+    ```go
+    mapName := map[key_dataType]value_dataType{
+        key1: value1,
+        key2: value2,
+    }
+    ```
+
+- ***Go Pointers***

@@ -2,7 +2,6 @@
 
 - ```go build ./<file_name>``` to build executable
 
-
 - ***Data types*** in GoLang :
 
     1. int (like int8, int16, int32, int64)
@@ -153,6 +152,63 @@
         }
         ```
 
+- ***Go Maps***
+
+    ```go
+    mapName := map[key_dataType]value_dataType{
+        key1: value1,
+        key2: value2,
+    }
+    ```
+
+    example:
+
+    ```go
+    b := map[string]int{"Oslo": 1, "Bergen": 2, "Trondheim": 3, "Stavanger": 4}
+    ```
+
+    Create maps using ```make()``` function
+
+    ```go
+    var a = make(map[KeyType]ValueType)
+    b := make(map[KeyType]ValueType)
+    ```
+
+    example:
+
+    ```go
+    b := make(map[string]int)
+    b["Oslo"] = 1
+    b["Bergen"] = 2
+    b["Trondheim"] = 3
+    b["Stavanger"] = 4
+    ```
+
+- ***Go Struct***
+
+    To declare a structure in Go, use the type and struct keywords
+
+    ```go
+    type struct_name struct {
+        member1 datatype;
+        member2 datatype;
+        member3 datatype;
+        ...
+    }
+    ```
+
+    example:
+
+    ```go
+    type Person struct {
+        name string
+        age int
+        job string
+        salary int
+    }
+    ```
+
+
 - ***Go functions***
 
     GO functions can also take fuctions as parameters and cna also return multiple values
@@ -179,13 +235,66 @@
     }
     ```
 
-- ***Go Maps***
+    GO named return values
 
     ```go
-    mapName := map[key_dataType]value_dataType{
-        key1: value1,
-        key2: value2,
+    func myFunction(x int, y int) (result int) {
+        result = x + y
+        return  
     }
     ```
 
-- ***Go Pointers***
+    GO multiple return multiple values
+
+    ```go
+    func myFunction(x int, y string) (result int, txt1 string) {
+        result = x + x
+        txt1 = y + " World!"
+        return
+    }
+    ```
+
+- **GO Receiver Functions**
+
+    You can declare methods with pointer receivers.
+
+    This means the receiver type has the literal syntax *T for some type T. (Also, T cannot itself be a pointer such as *int.)
+
+    For example, the Scale method here is defined on *Vertex.
+
+    Methods with pointer receivers can modify the value to which the receiver points (as Scale does here). Since methods often need to modify their receiver, pointer receivers are more common than value receivers.
+
+    Try removing the * from the declaration of the Scale function on line 16 and observe how the program's behavior changes.
+
+    With a value receiver, the Scale method operates on a copy of the original Vertex value. (This is the same behavior as for any other function argument.) The Scale method must have a pointer receiver to change the Vertex value declared in the main function.
+
+    ```go
+    type Vertex struct {
+	X, Y float64
+    }
+
+    func (v Vertex) Abs() float64 {
+        return math.Sqrt(v.X*v.X + v.Y*v.Y)
+    }
+
+    func (v *Vertex) Scale(f float64) {
+        v.X = v.X * f
+        v.Y = v.Y * f
+    }
+
+    func main() {
+        v := Vertex{3, 4}
+        fmt.Println(v.X, v.Y)
+        v.Scale(10)
+        fmt.Println(v.X, v.Y)
+        fmt.Println(v.Abs())
+    }
+    ```
+
+    Output:
+
+    ```go
+    3 4
+    30 40
+    50
+    ```

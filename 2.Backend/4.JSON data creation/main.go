@@ -13,7 +13,7 @@ type course struct {
 	Price    int    `json:"CoursePrice"`
 	Platform string
 	Password string   `json:"-"`
-	Tags     []string `json:"tgas,omitempty"`
+	Tags     []string `json:"tags,omitempty"`
 }
 
 func main() {
@@ -21,7 +21,13 @@ func main() {
 
 	fmt.Println("")
 
+	fmt.Println("Encoding JSON Data")
 	EncodeJson()
+
+	fmt.Println("")
+
+	fmt.Println("Decoding JSON Data")
+	DecodeJson()
 }
 
 func EncodeJson() {
@@ -39,4 +45,63 @@ func EncodeJson() {
 	}
 
 	fmt.Printf("%s\n", finalJson)
+}
+
+func DecodeJson() {
+	jsonData := []byte(`
+		[
+			{
+					"CourseName": "ReactJS",
+					"CoursePrice": 1000,
+					"Platform": "Udemy",
+					"tags": [
+							"web-dev",
+							"frontend"
+					]
+			},
+			{
+					"CourseName": "Django",
+					"CoursePrice": 2000,
+					"tags": [
+							"web-dev",
+							"backend"
+					]
+			},
+			{
+					"CourseName": "Flutter",
+					"CoursePrice": 1500,
+					"Platform": "Udemy"
+			}
+		]
+	`)
+
+	var lcourses []course
+
+	//Check if the JSON data is valid
+	checkValid := json.Valid(jsonData)
+
+	if checkValid {
+		//Why pass reference? Because we want to modify the original slice
+		json.Unmarshal(jsonData, &lcourses)
+
+		fmt.Printf("%#v\n", lcourses)
+	} else {
+		fmt.Println("JSON data is not valid")
+	}
+
+	fmt.Println("")
+
+	//Accessing the JSON data
+	var myData []map[string]interface{}
+	json.Unmarshal(jsonData, &myData)
+	fmt.Printf("%#v\n", myData)
+
+	fmt.Println("")
+
+	for _, v := range myData {
+		for key, value := range v {
+			fmt.Printf("%s: %v\n", key, value)
+		}
+		fmt.Println("")
+	}
 }

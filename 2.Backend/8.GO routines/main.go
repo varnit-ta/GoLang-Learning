@@ -8,7 +8,7 @@ import (
 
 /*
 WaitGroup is used to wait for the program to finish all goroutines
-Mutex is used to lock and unlock the codee
+Mutex is used to lock and unlock the code
 */
 
 var signals = []string{"test"}
